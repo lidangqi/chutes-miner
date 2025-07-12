@@ -5,9 +5,9 @@ all:
       - "ssh-rsa AAAA... user@hostname"
       - "ssh-rsa BBBB... user@hostname"
     # The username you want to use to login to those machines (and your public key will be added to).
-    user: billybob
+    user: root
     # The initial username to login with, for fresh nodes that may not have your username setup.
-    ansible_user: ubuntu
+    ansible_user: root
     # The default validator each GPU worker node will be assigned to.
     validator: 5Dt7HZ7Zpw4DppPxFM7Ke3Cm7sDAWhsZXmM5ZAmE7dSVJbcQ
     # By default, no nodes are the primary (CPU node running all the apps, wireguard, etc.) Override this flag exactly once below.
@@ -39,7 +39,7 @@ all:
     chutes-miner-cpu-0:
       ansible_host: 1.0.0.0
       external_ip: 1.0.0.0
-      wireguard_ip: 192.168.0.1
+      wireguard_ip: 172.16.0.1
       gpu_enabled: false
       is_primary: true
 
@@ -47,12 +47,12 @@ all:
     chutes-miner-gpu-0:
       ansible_host: 1.0.0.1
       external_ip: 1.0.0.1
-      wireguard_ip: 192.168.0.3
-    chutes-miner-gpu-1:
-      ansible_host: 1.0.0.2
-      external_ip: 1.0.0.2
-      wireguard_ip: 192.168.0.4
-    chutes-miner-gpu-2:
-      ansible_host: 1.0.0.3
-      external_ip: 1.0.0.3
-      wireguard_ip: 192.168.0.5
+      wireguard_ip: 172.16.0.3
+    #chutes-miner-gpu-1:
+    #  ansible_host: 1.0.0.2
+    #  external_ip: 1.0.0.2
+    #  wireguard_ip: 192.168.0.4
+    #chutes-miner-gpu-2:
+    #  ansible_host: 1.0.0.3
+    #  external_ip: 1.0.0.3
+    #  wireguard_ip: 192.168.0.5
