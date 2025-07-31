@@ -380,6 +380,17 @@ class Gepetto:
                 except Exception as exc:
                     logger.error(f"Failed to fetch chute utilization from {validator=}: {exc}")
 
+        # Deploy any priority chutes first, even if it requires preempting others
+        for validator in settings.validators:
+            for chute_id in settings.priority_chutes:
+                chute_info = self.remote_chutes.get(validator.hotkey, {}).get(chute_id)
+                if not chute_info:
+                    continue
+                if await self.count_deployments(chute_id, chute_info["version"], validator.hotkey) == 0:
+                    chute = await self.load_chute(chute_id, chute_info["version"], validator.hotkey)
+                    if chute:
+                        await self.scale_chute(chute, 1, preempt=True)
+                        return
         # Count the number of deployments for each chute
         chute_values = []
         for validator, chutes in self.remote_chutes.items():
