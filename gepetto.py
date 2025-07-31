@@ -382,7 +382,7 @@ class Gepetto:
 
         # Deploy any priority chutes first, even if it requires preempting others
         for validator in settings.validators:
-            for chute_id in settings.priority_chutes:
+                chute_id = '00331b13-3614-5b0a-ab48-56116167aeef'
                 chute_info = self.remote_chutes.get(validator.hotkey, {}).get(chute_id)
                 if not chute_info:
                     continue
