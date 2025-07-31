@@ -89,7 +89,7 @@ class Settings(BaseSettings):
     cache_max_age_days: int = int(os.getenv("CACHE_MAX_AGE_DAYS", "7"))
     cache_max_size_gb: int = int(os.getenv("CACHE_MAX_SIZE_GB", "500"))
     cache_overrides: dict = json.loads(os.getenv("CACHE_OVERRIDES", "{}")) or {}
-    priority_chutes: List[str] = json.loads(os.getenv("PRIORITY_CHUTES", "[\"00331b13-3614-5b0a-ab48-56116167aeef\"]")) or []
+    priority_chutes: str = os.environ["PRIORITY_CHUTES"]
 
     @property
     def validators(self) -> List[Validator]:
